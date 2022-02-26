@@ -1,9 +1,9 @@
 <?php
-$username = "onway";
-$password = "Onway@2022";
+$username = "root";
+$password = "";
 $hostname = "localhost";
 //connection to the database
-$dbhandle = mysqli_connect($hostname, $username, $password, "onway")
+$dbhandle = mysqli_connect($hostname, $username, $password, "onnway")
 	or die("Unable to connect to MySQL");
 //echo "Connected to MySQL<br>";
 

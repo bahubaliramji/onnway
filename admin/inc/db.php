@@ -1,3 +1,3 @@
 <?php
-$dbhandle = mysqli_connect('localhost', 'onway', 'Onway@2022', 'onway');
+$dbhandle = mysqli_connect('localhost', 'root', '', 'onnway');
 date_default_timezone_set("Asia/Kolkata");

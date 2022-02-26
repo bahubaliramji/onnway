@@ -17,7 +17,7 @@ if ($pcount > 0) {
 	$pdata = mysqli_fetch_array($fpromo);
 	$pid = $pdata['id'];
 	$plim = $pdata['uses'];
-	$expiry_date = $pdata['expiry_date'];
+	$expiry_date = $pdata['expiry_date']; 
 	$today = date("Y-m-d");
 
 	if ($today <= $expiry_date) {

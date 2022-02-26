@@ -5,12 +5,12 @@
  include("TBXadmin/include/config.php"); 
   $url_gm='http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; 
   
-    if(!isset($_SESSION['user_id'])){
+    if(!isset($_SESSION['token'])){
 	 echo "<META http-equiv='refresh' content='0;URL=index.php'>";
 	}else{
 	 $user_id = $_SESSION['user_id'];
 	}
-	  $path = $base_url."upload/documents/";
+	  $path = "upload/documents/";
   $random_key = strtotime(date('Y-m-d H:i:s'));
 	if(isset($_POST['add_booking'])){
 		
@@ -133,7 +133,7 @@ if(!empty($_FILES['gst_file']['name'])){
 	}
   
  $result = mysqli_query($dbhandle, "SELECT * FROM tbl_loader WHERE id = '".$_SESSION['user_id']."'");
- $rowU = mysqli_fetch_array($result);
+ //$rowU = mysqli_fetch_array($result);
  //print_r($rowU) ;
  
 	$page_title = "Check Fare";
