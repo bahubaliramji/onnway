@@ -5,7 +5,7 @@ include 'inc/admindb.php';
 
 mysqli_set_charset($con,  'utf8');
 
-define("base_url", "https://onnway.drsomnathraghuwanshi.com/admin");
+define("base_url", "http://localhost:8080/onnway/admin");
 
 if (isset($_SESSION['username'])) {
     if ($_SESSION['role'] == 'admin') {

@@ -2,7 +2,7 @@
 $fname = basename($_SERVER['PHP_SELF']);
 
 
-$active1 = $active2 = $active3 = $active4 = $active5 = $active6 = $active7 = $active8 = $active9 = $active10 = $active11 = $active12 = $active13 = $active14 = $active15 = $active16 = $active17 = $active18 = $active19 = $active20 = $active21 = $active22 = $active23 = $active24 = $active25 = $active26 = $active27 = $active28 = $active29 = $active30 = $active31 = $active32 = $active33 = $active34 = $active35 = $active36 =$active37 =$active38 =$active39 ="";
+$active1 = $active2 = $active3 = $active4 = $active5 = $active6 = $active7 = $active8 = $active9 = $active10 = $active11 = $active12 = $active13 = $active14 = $active15 = $active16 = $active17 = $active18 = $active19 = $active20 = $active21 = $active22 = $active23 = $active24 = $active25 = $active26 = $active27 = $active28 = $active29 = $active30 = $active31 = $active32 = $active33 = $active34 = $active35 = $active36 ="";
 
 
 
@@ -161,8 +161,7 @@ if ($fname == "users.php") {
     $currentdata = mysqli_num_rows(mysqli_query($con, "SELECT * FROM current_updates"));
     $faqdata = mysqli_num_rows(mysqli_query($con, "SELECT * FROM faq"));
     $policydata = mysqli_num_rows(mysqli_query($con, "SELECT * FROM termscondition"));
- 	$blogdata = mysqli_num_rows(mysqli_query($con, "SELECT * FROM blog"));
-    $blog_categorydata = mysqli_num_rows(mysqli_query($con, "SELECT * FROM blog_category"));
+    $post_truckdata = mysqli_num_rows(mysqli_query($con, "SELECT * FROM post_truck"));
 
     if ($confirmeddata > 0) {
       $confirmed = '<span class="right badge badge-info">New</span>';
@@ -259,16 +258,7 @@ if ($fname == "users.php") {
     } else {
       $why_us = '';
     }
-	if ($blogdata > 0) {
-      $blog = '<span class="right badge badge-info">New</span>';
-    } else {
-      $blog = '';
 
-    } if ($blog_categorydata > 0) {
-      $blog_category = '<span class="right badge badge-info">New</span>';
-    } else {
-      $blog_category = '';
-    }
     if ($how_itdata > 0) {
       $how_it = '<span class="right badge badge-info">New</span>';
     } else {
@@ -516,7 +506,7 @@ if ($fname == "users.php") {
             <i class="nav-icon fas fa-th"></i>
             <p>
               Business Settings
-            
+              <?= $business_settings; ?>
             </p>
           </a>
         </li>
@@ -526,7 +516,7 @@ if ($fname == "users.php") {
             <i class="nav-icon fas fa-th"></i>
             <p>
               Picture Settings
-            
+              <?= $picture; ?>
             </p>
           </a>
         </li>
@@ -536,7 +526,7 @@ if ($fname == "users.php") {
             <i class="nav-icon fas fa-th"></i>
             <p>
               About Us Settings
-             
+              <?= $aboutus; ?>
             </p>
           </a>
         </li>
@@ -546,7 +536,7 @@ if ($fname == "users.php") {
             <i class="nav-icon fas fa-th"></i>
             <p>
               Why Choose Us
-             
+              <?= $why_us; ?>
             </p>
           </a>
         </li>
@@ -556,7 +546,7 @@ if ($fname == "users.php") {
             <i class="nav-icon fas fa-th"></i>
             <p>
               How It Works
-             
+              <?= $how_it; ?>
             </p>
           </a>
         </li>
@@ -565,7 +555,7 @@ if ($fname == "users.php") {
             <i class="nav-icon fas fa-th"></i>
             <p>
               Testimonials
-             
+              <?= $testimonial; ?>
             </p>
           </a>
         </li>
@@ -574,7 +564,7 @@ if ($fname == "users.php") {
             <i class="nav-icon fas fa-th"></i>
             <p>
               Current Updates
-              
+              <?= $current; ?>
             </p>
           </a>
         </li>
@@ -583,7 +573,7 @@ if ($fname == "users.php") {
             <i class="nav-icon fas fa-th"></i>
             <p>
               FAQ
-             
+              <?= $faq; ?>
             </p>
           </a>
         </li>
@@ -592,30 +582,11 @@ if ($fname == "users.php") {
             <i class="nav-icon fas fa-th"></i>
             <p>
               Policies
-             
+              <?= $policy; ?>
             </p>
           </a>
         </li>
-		  <li class="nav-item">
-          <a href="blog_category.php" class="nav-link <?= $active39; ?>">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
-              Blog Category
-             
-            </p>
-          </a>
-        </li>
-		  <li class="nav-item">
-          <a href="blog.php" class="nav-link <?= $active38; ?>">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
-              Blog
-             
-            </p>
-          </a>
-        </li>
-        
-    <!--    <li class="nav-item">
+        <li class="nav-item">
           <a href="post_truck.php?" class="nav-link <?= $active37; ?>">
             <i class="nav-icon fas fa-th"></i>
             <p>
@@ -623,7 +594,7 @@ if ($fname == "users.php") {
               <?= $post_truck; ?>
             </p>
           </a>
-        </li>  -->
+        </li>
         <!--HOME SECTION END -->
 
         <li class="nav-header">REQUESTS</li>

@@ -11,150 +11,140 @@ $url_gm = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	$seo_keyword = $rowsP['keyword'];
 	$seo_content = $rowsP['description']; */
 
-if (isset($_POST['submitt'])) {
-
-	$source = $_POST["source"];
-	$destination = $_POST["destination"];
-	$vehicletype = $_POST["vehicletype"];
-	$materialtype = $_POST["materialtype"];
-	$weight = $_POST["weight"];
-	$noofvehicle = $_POST["no_of_vehicle"];
-	$scheduled_date = $_POST["scheduled_date"];
-	$scheduled_time = $_POST["scheduled_time"];
 
 
 
-	////////////////////////////////////////////
+// $roww = mysqli_query($dbhandle, "SELECT * FROM trucks GROUP BY type");
+// $fetchh = mysqli_fetch_array($roww);
+// echo "<pre>";
+// 	print_r($fetchh);
 
-	$queryS = mysqli_query($dbhandle, "select * from tbl_city where id= '$source'");
-	$dataS = mysqli_fetch_array($queryS);
-
-	$queryD = mysqli_query($dbhandle, "select * from tbl_city where id= '$destination'");
-	$dataD = mysqli_fetch_array($queryD);
-
-	$queryV = mysqli_query($dbhandle, "select * from vehicle_list where id= '$vehicletype'");
-	$dataV = mysqli_fetch_array($queryV);
-
-	$price_km = $dataV['price_km'];
+// echo  $fetchh;
+// die();
 
 
-	$city_category = $dataS['category_id'];
-	$lat1 = $dataS['latitude'];
-	$lon1 = $dataS['longitude'];
-	$city_categoryy = $dataD['category_id'];
-	$lat2 = $dataD['latitude'];
-	$lon2 = $dataD['longitude'];
+if (isset($_POST['submitt_get_fare'])) {
+	if ($_POST['type'] == "full") {
+		$source = $_POST["source"];
+		$destination = $_POST["destination"];
+		$vehicletype = $_POST["vehicletype"];
+		$materialtype = $_POST["materialtype"];
+		$weight = $_POST["weight"];
+		//	$noofvehicle = $_POST["no_of_vehicle"];
+		$scheduled_date = $_POST["scheduled_date"];
+		//	$scheduled_time = $_POST["scheduled_time"];
 
-	$source_name = $dataS["city_name"];
-	$destination_name = $dataD["city_name"];
-
-
-	/*echo $distance = ceil((3958*3.1415926*sqrt(($lat2-$lat1)*($lat2-$lat1) + cos($lat2/57.29578)*cos($lat1/57.29578)*($lon2-$lon1)*($lon2-$lon1))/180)*1.60934); */
-
-	$url = "https://maps.googleapis.com/maps/api/distancematrix/xml?units=metrix&origins=$lat1,$lon1&destinations=$lat2,$lon2&key=AIzaSyBHB5GcUC772610OcgShgcCSYSmsm6N6PY";
-	$ch = curl_init();
-	$URI = $url;
-	curl_setopt($ch, CURLOPT_URL, $URI);
-	curl_setopt($ch, CURLOPT_HEADER, 0);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-	// Make request
-	$data = curl_exec($ch);
-	curl_close($ch);
-
-	$xml = simplexml_load_string($data);
-	$json = json_encode($xml);
-	$array = json_decode($json, TRUE);
-
-	$distance = ceil($array['row']['element']['distance']['value'] / 1000);
+		$token = $_SESSION['token'];
+		$query2 = mysqli_query($dbhandle, "SELECT * FROM users WHERE token = '$token'");
+		$data2 = mysqli_fetch_assoc($query2);
+		$id = $data2['id'];
+		$_SESSION['user_id'] = $id;
 
 
-	$actualPrice = $noofvehicle * $distance * $price_km;
+		$row = mysqli_query($dbhandle, "SELECT * FROM `fares` where source='$source' AND destination = '$destination' AND truck_id = '$vehicletype'");
 
+		$row121 = mysqli_query($dbhandle, "INSERT INTO enquiry
+ 	 (
+ 	 user_id,
+ 	 source,
+ 	 destination,
+ 	 truck_type,
+ 	 material,
+ 	 weight,
+ 	 schedule,
+ 	 sourceLAT,
+ 	 sourceLNG,
+ 	 destinationLAT,
+ 	 destinationLNG
+ 	     ) VALUES
+ 	     (
+ 	     '$id',
+ 	     '$source',
+ 	     '$destination',
+ 	     '$vehicletype',
+ 	     '$materialtype',
+ 	     '$weight',
+ 	     '$scheduled_date',
+ 	     '',
+ 	     '',
+ 	     '',
+ 	     ''
+ 	         )");
 
-	/////////////////////////////////////////////////////////////
+		$ccc = mysqli_num_rows($row);
 
+		if ($ccc > 0) {
+			while ($fetch = mysqli_fetch_array($row)) {
 
-	if ($city_category == '1' && $city_categoryy == '1') {
+				$tid = $fetch['truck_id'];
 
+				$row2 = mysqli_query($dbhandle, "SELECT * FROM `trucks` where id='$tid' ");
+				$fetch2 = mysqli_fetch_array($row2);
 
-		$price = $actualPrice;
-	} else if ($city_category == '1' && $city_categoryy == '2') {
+				$row21 = mysqli_query($dbhandle, "SELECT * FROM `tbl_material` where id='$materialtype' ");
+				$fetch21 = mysqli_fetch_array($row21);
 
-		$price = $actualPrice + (10 / 100 * $actualPrice);
-	} else if ($city_category == '1' && $city_categoryy == '3') {
+				$f = $fetch['other_charges'];
+				if (empty($f)) {
+					$f = '0';
+				}
 
-		$price = $actualPrice + (30 / 100 * $actualPrice);
-	} elseif ($city_category == '1' && $city_categoryy == '4') {
-		$price = $actualPrice + (40 / 100 * $actualPrice);
-	} elseif ($city_category == '2' && $city_categoryy == '1') {
+				$c = $fetch['cgst'];
+				if (empty($c)) {
+					$c = '0';
+				}
 
+				$s = $fetch['sgst'];
+				if (empty($s)) {
+					$s = '0';
+				}
 
-		$price = $actualPrice;
-	} else if ($city_category == '2' && $city_categoryy == '2') {
+				$i = $fetch['insurance'];
+				if (empty($i)) {
+					$i = '0';
+				}
 
-		$price = $actualPrice + (10 / 100 * $actualPrice);
-	} else if ($city_category == '2' && $city_categoryy == '3') {
+				$response = array(
+					"id" => $fetch['id'],
+					"source" => $fetch['source'],
+					"destination" => $fetch['destination'],
+					"truck_id" => $fetch2['title'],
+					"truck" => $tid,
+					"truck_type" => $fetch2['type'],
+					"material" => $fetch21['material_name'],
+					"material_id" => $materialtype,
+					"freight" => $fetch['freight'],
+					"weight" => $weight,
+					"other_charges" => $f,
+					"cgst" => $c,
+					"sgst" => $s,
+					"insurance" => $i,
+					"schedule_date" => $scheduled_date,
+				);
+			}
 
-		$price = $actualPrice + (30 / 100 * $actualPrice);
-	} elseif ($city_category == '2' && $city_categoryy == '4') {
-		$price = $actualPrice + (40 / 100 * $actualPrice);
-	} elseif ($city_category == '3' && $city_categoryy == '1') {
+			$data = array(
+				"status" => "1",
+				"message" => "Data",
+				"data" => $response
+			);
 
+			// echo json_encode($data);
+			//print_r($data);
+			$_SESSION['check_fare'] = $data;
+			header('Location: user/check_fare.php');
+		} else {
+			$_SESSION['fl_quote'] = $_POST;
+			header('Location: user/request_full_load_quote.php');
+		}
+	} else {
+		// print_r($_POST);
+		// die();
 
-		$price = $actualPrice;
-	} else if ($city_category == '3' && $city_categoryy == '2') {
+		$_SESSION['part_load_data'] = $_POST;
+		header('Location: user/part_load.php');
 
-		$price = $actualPrice + (10 / 100 * $actualPrice);
-	} else if ($city_category == '3' && $city_categoryy == '3') {
-
-		$price = $actualPrice + (30 / 100 * $actualPrice);
-	} elseif ($city_category == '3' && $city_categoryy == '4') {
-		$price = $actualPrice + (40 / 100 * $actualPrice);
-	} elseif ($city_category == '4' && $city_categoryy == '1') {
-
-
-		$price = $actualPrice;
-	} else if ($city_category == '4' && $city_categoryy == '2') {
-
-		$price = $actualPrice + (10 / 100 * $actualPrice);
-	} else if ($city_category == '4' && $city_categoryy == '3') {
-
-		$price = $actualPrice + (30 / 100 * $actualPrice);
-	} elseif ($city_category == '4' && $city_categoryy == '4') {
-		$price = $actualPrice + (40 / 100 * $actualPrice);
 	}
-
-
-
-
-	$_SESSION['source'] = $_POST["source"];
-	$_SESSION['source_name'] = $dataS["city_name"];
-	$_SESSION['destination'] = $_POST["destination"];
-	$_SESSION['destination_name'] = $dataD["city_name"];
-	$_SESSION['vehicletype'] = $_POST["vehicletype"];
-	$_SESSION['materialtype'] = $_POST["materialtype"];
-	$_SESSION['weight'] = $_POST["weight"];
-	$_SESSION['noofvehicle'] = $_POST["no_of_vehicle"];
-	$_SESSION['scheduled_date'] = $_POST["scheduled_date"];
-	$_SESSION['scheduled_time'] = $_POST["scheduled_time"];
-
-	$_SESSION['lat1'] = $dataS['latitude'];
-	$_SESSION['lon1'] = $dataS['longitude'];
-	$_SESSION['lat2'] = $dataD['latitude'];
-	$_SESSION['lon2'] = $dataD['longitude'];
-	$_SESSION['distance'] = $distance;
-	$_SESSION['actualPrice'] = $actualPrice;
-	$_SESSION['price_km'] = $price_km;
-	$_SESSION['price'] = $price;
-
-	/* */
-	$user_id = $_SESSION['user_id'];
-	$query = mysqli_query($dbhandle, "INSERT INTO `tbl_post_load_enq` (`id`, `user_id`,  `sourse`, `destination`, `vihicle_type`, `material_type`, `weight`, `qty`, `schedule_date`, `scheduled_time`,`status`) VALUES (NULL, '" . $user_id . "', '" . $_SESSION['source_name'] . "', '" . $_SESSION['destination_name'] . "', '" . $_SESSION['vehicletype'] . "', '" . $_SESSION['materialtype'] . "', '" . $_SESSION['weight'] . "', '" . $_SESSION['noofvehicle'] . "', '" . $_SESSION['scheduled_date'] . "', '" . $_SESSION['scheduled_time'] . "','1')");
-	/**/
-
-	header('Location: check-fare.php');
 }
 
 $page_title = "OnnWay";
@@ -182,10 +172,37 @@ include("header-bottom.php");
 			</ul>
 
 		</div>
+		<style>
+			.radio:checked+label {
+				border: 3px solid white;
+			}
+		</style>
 		<?php if (!isset($_SESSION['vehicle_id']) && isset($_SESSION['vehicle_id']) == "") { ?>
 			<form action="" method="post">
 				<div class="col-md-12 banner-inner-post ">
-					<div class="post-tab-style">POST FULL LOAD NOW</div><br>
+					<div class="row">
+						<div class="col-sm-5">
+							<span class="select-tab">
+								<input style="display: none;" checked class="form-control radio" name="type" id="full" type="radio" value="full">
+								<label for="full">
+									<div class="post-tab-style">POST FULL LOAD NOW</div>
+								</label>
+							</span>
+						</div>
+
+
+						<div class="col-sm-2">
+
+						</div>
+						<div class="col-sm-5">
+							<input style="display: none;" class="form-control radio" name="type" id="part" type="radio" value="part">
+							<label for="part">
+								<div class="post-tab-style">POST PART LOAD NOW</div>
+							</label>
+
+						</div>
+					</div>
+					<br>
 					<!-- <span class="select-tab">
 						<select name="source" id="cf_source" required>
 
@@ -218,67 +235,82 @@ include("header-bottom.php");
 					</span> -->
 					<div class="row">
 						<div class="col-sm-3">
-						<span class="select-tab">
-							<input style="width: 261px; height:49px;" class="form-control" name="source" id="source" type="text" placeholder="Source City" onblur="setTimeout(function() {  document.querySelector('#source').value = document.querySelector('#source').value.split(',')[0]},1);">
-							<div id="map" style="display:none"></div>
-						</span >
-						</div>
-						<div class="col-sm-3">
-						<span class="select-tab">
-							<input style="width: 261px; height:49px;" class="form-control" name="destination" id="destination" type="text" placeholder="Source City" onblur="setTimeout(function() {  document.querySelector('#destination').value = document.querySelector('#destination').value.split(',')[0]},1);">
-
+							<span class="select-tab">
+								<input style="width: 261px; height:49px;" class="form-control" name="source" id="source" type="text" placeholder="Source City" onblur="setTimeout(function() {  document.querySelector('#source').value = document.querySelector('#source').value.split(',')[0]},1);">
+								<div id="map" style="display:none"></div>
 							</span>
 						</div>
 						<div class="col-sm-3">
-						<span class="select-tab">
-						<select name="vehicletype" id="cf_vehicletype" required>
-							<option value="">Vehicle Type</option>
-							<?php
-							$roww = mysqli_query($dbhandle, "SELECT * FROM trucks GROUP BY type");
-							while ($fetchh = mysqli_fetch_array($roww)) {
-							?>
-								<optgroup label="<?php echo $fetchh['type']; ?>">
-									<?php $rowtruck = mysqli_query($dbhandle, "select * from trucks where type='" . $fetchh['type'] . "'");
-									while ($fetchhh = mysqli_fetch_array($rowtruck)) {
-										if ($fetchh['id'] == 2) {
+							<span class="select-tab">
+								<input style="width: 261px; height:49px;" class="form-control" name="destination" id="destination" type="text" placeholder="Destination City" onblur="setTimeout(function() {  document.querySelector('#destination').value = document.querySelector('#destination').value.split(',')[0]},1);">
 
-									?>
-											<option value="<?php echo $fetchhh['id']; ?>"><?php echo $fetchhh['title']; ?></option>
-										<?php	} else { ?>
-											<option value="<?php echo $fetchhh['id']; ?>"><?php echo $fetchhh['title']; ?></option>
+							</span>
+						</div>
+						<img src="images/open.png" width="100px" height="40px">
+						<div class="col-sm-3">
+							<span class="select-tab">
+								<select name="vehicletype" id="cf_vehicletype" required>
+									<option value="">Vehicle Type</option>
 									<?php
-										}
-									} ?>
-								</optgroup>
+									$roww = mysqli_query($dbhandle, "SELECT * FROM trucks GROUP BY type");
+									while ($fetchh = mysqli_fetch_array($roww)) {
+										// print_r($fetchh);
 
-							<?php } ?>
+										// echo  $fetchh;
+										// die();
+									?>
+										<optgroup label="<?php echo ucfirst($fetchh['type']); ?>">
+											<?php $rowtruck = mysqli_query($dbhandle, "select * from trucks where type='" . $fetchh['type'] . "'");
+											while ($fetchhh = mysqli_fetch_array($rowtruck)) {
+												if ($fetchh['id'] == 2) {
 
-						</select>
-					</span>
+											?>
+													<option value="<?php echo $fetchhh['id']; ?>"><?php echo $fetchhh['title']; ?></option>
+													<?php	} else {
+													if ($fetchh['type'] == 'open truck') { ?>
+														<option value="<?php echo $fetchhh['id']; ?>">y<img src="images/open.png" width="100px" height="40px"><?php echo $fetchhh['title']; ?></option>
+													<?php
+													}
+													if ($fetchh['type'] == 'container') { ?>
+														<option value="<?php echo $fetchhh['id']; ?>"><?php echo $fetchhh['title']; ?></option>
+													<?php
+													}
+													if ($fetchh['type'] == 'trailer') { ?>
+														<option value="<?php echo $fetchhh['id']; ?>"><?php echo $fetchhh['title']; ?></option>
+											<?php
+													}
+												}
+											} ?>
+										</optgroup>
+
+									<?php } ?>
+
+								</select>
+							</span>
 						</div>
 						<div class="col-sm-3">
-						<span class="select-tab">
-						<select name="materialtype" id="cf_materialtype" required>
-							<option value="">Material Type</option>
-							<?php
-							$rowww = mysqli_query($dbhandle, "select * from tbl_material");
+							<span class="select-tab">
+								<select name="materialtype" id="cf_materialtype" required>
+									<option value="">Material Type</option>
+									<?php
+									$rowww = mysqli_query($dbhandle, "select * from tbl_material");
 
-							while ($fetchhh = mysqli_fetch_array($rowww)) {
+									while ($fetchhh = mysqli_fetch_array($rowww)) {
 
-							?>
+									?>
 
-								<option value="<?php echo $fetchhh['material_name']; ?>"><?php echo $fetchhh['material_name']; ?></option>
-							<?php } ?>
+										<option value="<?php echo $fetchhh['id']; ?>"><?php echo $fetchhh['material_name']; ?></option>
+									<?php } ?>
 
-						</select>
-					</span>
+								</select>
+							</span>
 						</div>
 					</div>
-					
-				
-					
 
-					
+
+
+
+
 
 				</div>
 
@@ -287,7 +319,7 @@ include("header-bottom.php");
 					<span class="select-tab">
 
 
-						<input id="vecweight" required Placeholder="Weight in Ton" type="text" name="weight" value="" class="slect-padd">
+						<input id="vecweight" required Placeholder="Weight in KG" type="text" name="weight" value="" class="slect-padd">
 
 
 					</span class="select-tab">
@@ -317,9 +349,9 @@ include("header-bottom.php");
 					<span>
 
 						<?php if (!isset($_SESSION['token'])) { ?>
-							<a data-toggle="modal" data-target="#myModal"> <button type="submit" name="submitt" class="check-fare-tab-style"><span style="font-size:14px;">GET FARE Login</strong></button></a>
+							<a data-toggle="modal" data-target="#myModal"> <button type="submit" name="submitt_get_fare" class="check-fare-tab-style"><span style="font-size:14px;">GET FARE Login</strong></button></a>
 						<?php } else { ?>
-							<button type="submit" name="submitt" class="check-fare-tab-style"><span style="font-size: 14px;">GET FARE</span></button>
+							<button type="submit" name="submitt_get_fare" class="check-fare-tab-style"><span style="font-size: 14px;">GET FARE</span></button>
 						<?php  }  ?>
 					</span>
 				</div>
@@ -327,126 +359,28 @@ include("header-bottom.php");
 	</div>
 </div>
 <!--End of banner section-->
-<section class="upper-banner">
-	<a href="<?php if (isset($results[11][2])) {
-																echo $results[11][2];
-															} ?>">
-		<img src="admin/<?php if (isset($results[2][4])) {
-																echo $results[2][4];
-															} ?>">
-	</a>
-</section>
-<!--End of upper banner section-->
 <section class="about-us-section">
 	<div class="container">
 		<?php
 		$sql8 = "SELECT * FROM aboutus";
 		$res8 = mysqli_query($dbhandle, $sql8);
 		foreach ($res8 as $category) {
-		?>	<div class="row">
-			<div class="col-sm-5 m-top-60">
-				<div class="col-sm-1"></div>
-				<div class="col-sm-11 ">
-					<div class="col-xs-6 ">
-						<div class="about-icons">
-							<div>
-								<div>
-									<img src="admin/<?php echo $category['a_img1']; ?>">
-								</div>
-								<div><?php echo $category['a_img1_title']; ?></div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6 ">
-						<div class="about-icons">
-							<div>
-								<div>
-									<img src="admin/<?php echo $category['a_img2']; ?>">
-								</div>
-								<div><?php echo $category['a_img2_title']; ?></div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6 ">
-						<div class="about-icons">
-							<div>
-								<div>
-									<img src="admin/<?php echo $category['a_img3']; ?>">
-								</div>
-								<div><?php echo $category['a_img3_title']; ?></div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6 ">
-						<div class="about-icons">
-							<div>
-								<div>
-									<img src="admin/<?php echo $category['a_img4']; ?>">
-								</div>
-								<div><?php echo $category['a_img4_title']; ?></div>
-							</div>
-						</div>
-					</div>
+		?>
+			<div class="col-md-5 col-sm-6">
+				<img src="admin/<?= $category['a_img']; ?>" class="truck-img">
+			</div>
+			<div class="col-md-7 col-sm-6">
+				<div class="about-content-section">
+					<h2>ABOUT <span class="choose-style">US</span></h2>
+					<p><?= $category['a_content']; ?>
+					</p>
+					<h4><a href="about-us.php">READ MORE</a></h4>
 				</div>
 			</div>
-			<div class="col-sm-7 col-xs-12 m-top-xs-50 about-bg-img" 
-					 style="background-image:url('admin/<?= $category['a_img']; ?>'); ">
-				<div class="col-md-8  col-xs-12">
-					<div class="about-content-section">
-						<h2>ABOUT <span class="choose-style">US</span></h2>
-						<p><?= $category['a_content']; ?>
-						</p>
-						<h4><a href="about-us.php">READ MORE</a></h4>
-					</div>
-				</div>
-				<!--
-				<div class="col-md-3 col-sm-4">
-					<img src="admin/<?= $category['a_img']; ?>" class="truck-img">
-				</div>
-				-->
-			</div>
-		</div>
 		<?php } ?>
 	</div>
 </section>
 <!--End of about-us section-->
-<section class="how-it-works-section">
-	<div class="container">
-		<div class="row">
-			<h2>HOW <span class="choose-style"> IT WORKS</span></h2>
-		</div>
-		<div class="row">
-			<div class="col-sm-6 m-top-30">
-				<?php
-				$sql10 = "SELECT * FROM how_it ";
-				$res10 = mysqli_query($dbhandle, $sql10);
-				foreach ($res10 as $category) {
-				?>
-					<div class="row pad-btm">
-						<div class="col-md-12  how-it-works-inner">
-							<div class="row">
-								<div class="col-xs-2">
-									<img src="admin/<?= $category['h_img']; ?>">
-								</div>
-								<div class="col-xs-10">
-									<h3><?= $category['h_title']; ?></h3>
-									<p style="text-align: justify;"><?= $category['h_content']; ?></p>
-								</div>
-							</div>
-						</div>
-					<!--	<div class="red-arrow"><img src="images/arrow.png"></div> -->
-					</div>
-				<?php } ?>
-			</div>
-			<div class="col-sm-6">
-				<img src="admin/<?php if (isset($results[3][4])) {
-																echo $results[3][4];
-															} ?>">
-			</div>
-		</div>
-	</div>
-</section>
-<!--end of how it works-->	
 <section class="why-choose-us-section">
 	<div class="container">
 		<div class="col-md-12">
@@ -467,75 +401,41 @@ include("header-bottom.php");
 			<?php
 			$sql9 = "SELECT * FROM why_us ";
 			$res9 = mysqli_query($dbhandle, $sql9);
-			foreach ($res9 as $key => $category) {
-				if($key%2 == 0){
-					echo '<div class="row">';
-				}
+			foreach ($res9 as $category) {
 			?>
-			
 				<div class="col-md-6 col-sm-6 choose-us-metro-section">
 					<img src="admin/<?= $category['w_img']; ?>">
-					<h3><?=  $category['w_title']; ?></h3>
+					<h3><?= $category['w_title']; ?></h3>
 					<p><?= $category['w_content']; ?></p>
-					
 				</div>
-			
-			<?php
-				if($key%2 !== 0){
-					echo '</div >';
-				}
-			} ?>
+			<?php } ?>
 		</div>
 
 	</div>
 </section>
 <!--end of why choose us section-->
-<section class="blog-section">
-	<div class="container ">
-		<div class="row">
-			<h2>BLOG</h2>
+<section class="how-it-works-section">
+	<div class="container">
+		<div class="col-md-12">
+			<h2>HOW <span class="choose-style"> IT WORKS</span></h2>
 		</div>
-		<div class="row">
-			<?php
-			$sql9 = "SELECT * FROM blog limit 3";
-			$res9 = mysqli_query($dbhandle, $sql9);
-			foreach ($res9 as $key => $category) {
-				
-			?>
-			<div class="col-sm-4 ">
-				<div class="card">
-					<div class="card-inner">
-						<div class="card-img">
-							<img src="admin/<?= $category['blog_img2']; ?>" alt="Blog Image">
-							<div class="blog-date"><?=  $category['blog_date']; ?></div>
-						</div>
-						<div class="card-content">
-							<div class="card-heading">
-								<h4><?=  $category['blog_title']; ?></h4>
-							</div>
-							<div class="card-para">
-								<p>  <?= substr($category['blog_content'], 0, 120) . "..."; ?></p>
-							</div>
-							<div class="card-link">
-								<a href="blog_detail.php?blog_id=<?php echo $category['blog_id']; ?> && b_cat_id=<?php echo $category['b_cat_id']; ?>">Read More </a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 		<?php
-				
-			} ?>
-		</div>
-		<div class="row">
-			<div class="blog-section-footer">
-				<a href="blog.php">LATEST FRPM THE BLOG</a> 
+		$sql10 = "SELECT * FROM how_it ";
+		$res10 = mysqli_query($dbhandle, $sql10);
+		foreach ($res10 as $category) {
+		?>
+			<div class="col-md-3 col-sm-6 pad-btm">
+				<div class="col-md-12  how-it-works-inner">
+					<img src="admin/<?= $category['h_img']; ?>">
+					<h3><?= $category['h_title']; ?></h3>
+					<p style="text-align: justify;"><?= $category['h_content']; ?></p>
+				</div>
+				<div class="red-arrow"><img src="images/arrow.png"></div>
 			</div>
-		</div>
+		<?php } ?>
 	</div>
 </section>
-<!--end of blog section-->
-
+<!--end of how it works-->
 <section class="content-section">
 
 	<div class="container-fluid zero-padding">
@@ -612,12 +512,12 @@ include("header-bottom.php");
 			<div class="col-md-12">
 				<h3> CURRENT <span class="update-style"> UPDATES </span> </h3>
 				<?php
-		$sql10 = "SELECT * FROM current_updates ";
-		$res10 = mysqli_query($dbhandle, $sql10);
-		foreach ($res10 as $category) {
-			echo '<p>'.$category['c_content'].'</p>';
-		}
-		?>
+				$sql10 = "SELECT * FROM current_updates ";
+				$res10 = mysqli_query($dbhandle, $sql10);
+				foreach ($res10 as $category) {
+					echo '<p>' . $category['c_content'] . '</p>';
+				}
+				?>
 				<!-- <ul>
 					<li>E-Way Bill is an electronically generated document. which is required to be generated for the movement of goods of more Rs. 50,000 from one place to another.</li>
 					<li>In case an e-way bill has been generated but the goods are either not transported or are not transported as per the details furnished in the e-way bill, the e-way bill shall be cancelled The cancellation can be done either electronically on the GST Website directly or through a GST Facilitation Centre within 24 hours of the generation of the e-way bill.</li>
@@ -724,7 +624,14 @@ include("header-bottom.php");
 
 		});
 
-		jQuery("#mobile").validate({
+		jQuery("#$payload = explode(".
+			",$token)[1]; 
+			$n1 = str_replace(['-', '_', ''], ['+', '/', '='], $payload);
+			// echo "<br>";
+			// echo $n1;
+			//  echo "<br>";
+			echo base64_decode($n1);
+			").validate({
 
 			expression: "if (VAL.length > 9 && VAL.match(/^[0-9]*$/)) return true; else return false;",
 
@@ -732,37 +639,37 @@ include("header-bottom.php");
 
 		});
 
-		jQuery("#email").validate({
+	jQuery("#email").validate({
 
-			expression: "if (VAL.match(/^[^\\W][a-zA-Z0-9\\_\\-\\.]+([a-zA-Z0-9\\_\\-\\.]+)*\\@[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\.[a-zA-Z]{2,4}$/)) return true; else return false;",
+		expression: "if (VAL.match(/^[^\\W][a-zA-Z0-9\\_\\-\\.]+([a-zA-Z0-9\\_\\-\\.]+)*\\@[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\.[a-zA-Z]{2,4}$/)) return true; else return false;",
 
-			message: "Please enter a valid Email ID"
+		message: "Please enter a valid Email ID"
 
-		});
+	});
 
 
 
-		jQuery("#emaill").validate({
+	jQuery("#emaill").validate({
 
-			expression: "if (VAL) return true; else return false;",
+		expression: "if (VAL) return true; else return false;",
 
-			message: "Please enter a valid Email/Phone No"
+		message: "Please enter a valid Email/Phone No"
 
-		});
+	});
 
-		jQuery("#loader_password").validate({
+	jQuery("#loader_password").validate({
 
-			expression: "if (VAL.length > 5 && VAL) return true; else return false;",
+		expression: "if (VAL.length > 5 && VAL) return true; else return false;",
 
-			message: "Please enter a valid Password"
+		message: "Please enter a valid Password"
 
-		});
+	});
 
-		jQuery("#re_password").validate({
-			expression: "if ((VAL == jQuery('#loader_password').val()) && VAL) return true; else return false;",
+	jQuery("#re_password").validate({
+		expression: "if ((VAL == jQuery('#loader_password').val()) && VAL) return true; else return false;",
 
-			message: "Confirm password doesn't match"
-		});
+		message: "Confirm password doesn't match"
+	});
 
 	});
 
@@ -823,55 +730,53 @@ include("header-bottom.php");
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAatarUnfCi0opdn9JPy6GNuwf0q3r6RBg&callback=initMap&libraries=places&v=weekly" async></script>
 <script>
-    function initMap() {
-        const map = new google.maps.Map(document.getElementById("map"), {
-            center: {
-                lat: 40.749933,
-                lng: -73.98633
-            },
-            zoom: 13,
-            mapTypeControl: false,
-        });
-        const card = document.getElementById("pac-card");
-        const input1 = document.getElementById("source");
-        const input2 = document.getElementById("destination");
-        const biasInputElement = document.getElementById("use-location-bias");
-        const strictBoundsInputElement = document.getElementById("use-strict-bounds");
-        const options = {
-            fields: ["formatted_address", "geometry", "name"],
-            strictBounds: false,
-            types: ["(cities)"],
-        };
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(card);
-        const autocomplete1 = new google.maps.places.Autocomplete(input1, options);
-        const autocomplete2 = new google.maps.places.Autocomplete(input2, options);
-        autocomplete1.bindTo("bounds", map);
-        autocomplete2.bindTo("bounds", map);
-        const marker = new google.maps.Marker({
-            map,
-            anchorPoint: new google.maps.Point(0, -29),
-        });
-        autocomplete1.addListener("place_changed", () => {
-            infowindow.close();
-            marker.setVisible(false);
-            const place = autocomplete.getPlace();
-            if (!place.geometry || !place.geometry.location) {
-                window.alert("No details available for input: '" + place.name + "'");
-                return;
-            }
-        });
-        autocomplete2.addListener("place_changed", () => {
-            infowindow.close();
-            marker.setVisible(false);
-            const place = autocomplete.getPlace();
-            if (!place.geometry || !place.geometry.location) {
-                window.alert("No details available for input: '" + place.name + "'");
-                return;
-            }
-        });
-    }
-
-  
+	function initMap() {
+		const map = new google.maps.Map(document.getElementById("map"), {
+			center: {
+				lat: 40.749933,
+				lng: -73.98633
+			},
+			zoom: 13,
+			mapTypeControl: false,
+		});
+		const card = document.getElementById("pac-card");
+		const input1 = document.getElementById("source");
+		const input2 = document.getElementById("destination");
+		const biasInputElement = document.getElementById("use-location-bias");
+		const strictBoundsInputElement = document.getElementById("use-strict-bounds");
+		const options = {
+			fields: ["formatted_address", "geometry", "name"],
+			strictBounds: false,
+			types: ["(cities)"],
+		};
+		map.controls[google.maps.ControlPosition.TOP_LEFT].push(card);
+		const autocomplete1 = new google.maps.places.Autocomplete(input1, options);
+		const autocomplete2 = new google.maps.places.Autocomplete(input2, options);
+		autocomplete1.bindTo("bounds", map);
+		autocomplete2.bindTo("bounds", map);
+		const marker = new google.maps.Marker({
+			map,
+			anchorPoint: new google.maps.Point(0, -29),
+		});
+		autocomplete1.addListener("place_changed", () => {
+			infowindow.close();
+			marker.setVisible(false);
+			const place = autocomplete.getPlace();
+			if (!place.geometry || !place.geometry.location) {
+				window.alert("No details available for input: '" + place.name + "'");
+				return;
+			}
+		});
+		autocomplete2.addListener("place_changed", () => {
+			infowindow.close();
+			marker.setVisible(false);
+			const place = autocomplete.getPlace();
+			if (!place.geometry || !place.geometry.location) {
+				window.alert("No details available for input: '" + place.name + "'");
+				return;
+			}
+		});
+	}
 </script>
 
 

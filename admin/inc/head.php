@@ -7,8 +7,8 @@ $role = $_SESSION['role'];
 
 mysqli_set_charset($con,  'utf8');
 
-define("base_url", "https://onnway.drsomnathraghuwanshi.com/admin/");
-define("base_url2", "https://onnway.drsomnathraghuwanshi.com/");
+define("base_url", "http://localhost:8080/onnway/admin/");
+define("base_url2", "http://localhost:8080/onnway/");
 
 if (!isset($_SESSION['username'])) {
   header('Location:index.php');

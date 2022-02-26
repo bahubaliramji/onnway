@@ -4,7 +4,6 @@
  include("controls/define2.php"); 
  include("TBXadmin/include/config.php");
 /* print_r($_POST); */
-echo "hy";
 if(isset($_POST['post'])){
 	date_default_timezone_set('Asia/Kolkata');
 	$_SESSION['source'] = $_POST["source"];
