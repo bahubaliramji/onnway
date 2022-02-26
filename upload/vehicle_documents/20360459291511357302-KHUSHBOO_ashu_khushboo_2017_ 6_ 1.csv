@@ -1,0 +1,9 @@
+#Event,Source,Time,Error Severity,Domain,User,Description
+1,Profile Manager API,06/01/2017 23:37:12,Error,Profile,ashu_khushboo,An error occurred while initializing the COM engine.
+2,Profile Manager API,06/01/2017 23:37:12,Error,Profile,ashu_khushboo,An unexpected exception occured. It has this error code 
+3,Profile Manager API,06/01/2017 23:37:12,Error,Profile,ashu_khushboo,An error occurred while initializing the COM engine.
+4,Profile Manager API,06/01/2017 23:37:12,Error,Profile,ashu_khushboo,An unexpected exception occured. It has this error code 
+5,Profile Manager API,06/01/2017 23:37:12,Error,Profile,ashu_khushboo,An error occurred while initializing the COM engine.
+6,Profile Manager API,06/01/2017 23:37:12,Error,Profile,ashu_khushboo,An unexpected exception occured. It has this error code 
+7,Profile Manager API,06/01/2017 23:37:12,Error,Profile,ashu_khushboo,An error occurred while initializing the COM engine.
+8,Profile Manager API,06/01/2017 23:37:12,Error,Profile,ashu_khushboo,An unexpected exception occured. It has this error code 

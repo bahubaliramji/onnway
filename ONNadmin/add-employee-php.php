@@ -1,0 +1,30 @@
+<?php
+include("include/config.php");
+$username=$_POST['username'];
+$email=$_POST['email'];
+$password=$_POST['password'];
+$loadrequest=0;
+$loadrequest=$_POST['loadrequest'];
+echo $loadrequest;
+$managequote=0;
+$managequote=$_POST['managequote'];
+echo $managequote;
+$employeelogin=0;
+$employeelogin=$_POST['employeelogin'];
+$loaderregistration=0;
+$loaderregistration=$_POST['loaderregistration'];
+$vechileregistration=0;
+$vechileregistration=$_POST['vechileregistration'];
+$trackorder=0;
+$trackorder=$_POST['trackorder'];
+$bookedtruck=0;
+$bookedtruck=$_POST['bookedtruck'];
+$bookedorder=0;
+$bookedorder=$_POST['bookedorder'];
+$setting=0;
+$setting=$_POST['setting'];
+$transportform=0;
+$transportform=$_POST['transportform'];
+$row = mysqli_query($dbhandle,"INSERT INTO `tbl_admin`(`username`, `email`, `password`, `managequotes`, `loadrequest`, `employeelogin`, `loaderreg`, `vehiclereg`, `trackorder`, `bookedtruck`, `bookedorder`, `setting`, `transportform`) VALUES ('$username','$email','$password','$managequote','$loadrequest','$employeelogin','$loaderregistration','$vechileregistration','$trackorder','$bookedtruck','$bookedorder','$setting','$transportform')");
+header('location:employeelogin.php');
+?>

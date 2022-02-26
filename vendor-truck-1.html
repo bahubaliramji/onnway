@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rahul Rajppot</title>
+   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/login-popup.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<header>
+  <div class="container">
+    <div class="col-sm-3 logo">
+      <a href="index.html"><img src="images/logo.png"></a>
+    </div>
+    <div class="col-sm-9 header-top-right">
+      <span class="down-app"><img src="images/mobile.png"> &nbsp;  Download App</span>
+      <span class="phone-contact"><img src="images/phone.png"> &nbsp;  +91 9313 9313 93</span>
+      <span class="login-section"><a data-toggle="modal" data-target="#myModal">LOGIN  |  REGISTER</a></span>
+      <span class="dropdown-top">
+      <select>
+        <option>ENG</option>
+        <option>HIN</option>
+      </select>
+      </span>
+    </div>
+  </div>
+</header>
+<!--end of top header-->
+<header class="header-bottom">
+  <div class="container">
+    <div class="col-md-5 header-bottom-right-text">
+      <h3>SERVICES&nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;TRACK & TRACE</h3>
+    </div>
+
+    <div class="col-md-7">
+    <div class="header-bottom-right-section">
+      <button type="button" class="tab-style">POST A TRUCK</button>
+    </div>
+    
+      
+      
+    </div>
+  </div>
+</header>
+<!--end of top header bottom-->
+<!--START OF BREADCRUMB-->
+<section>
+<div class="container">
+<div class="col-md-12">
+  <div class="breadcrumb-section">
+    <ul>
+       <li><a href="#"> <img src="images/home.png"> </a></li>
+       <li><a href="#" class="bred-active"> Vendor Dashboard </a></li>
+    </ul>
+  </div>
+  </div>
+</div>
+</section>
+<!--END OF BREADCRUMB-->
+
+<!--START OF ADDRESS BOOK-->
+<section>
+  <div class="main-dashboarsd-section">
+    <div class="container">
+       <div class="col-md-4">
+          <div class="vendor-dashboard-section">
+            <h4>USER DASHBOARD</h4>
+          </div>
+          <div class="dashboad-details">
+            <ul>
+              <li><a href="#"> <img src="images/account-detail.png"> Account Details </a></li>
+              <li><a href="#"> <img src="images/com-detail.png"> Company Details </a></li>
+               <li class="dropdown"><a href="#"> <img src="images/my-order.png"> My Truck </a></li> 
+            </ul>
+          </div>
+       </div>
+ 
+       <div class="col-md-8">
+       
+          <div class="my-listed-truck">
+            <h5> My listed Trucks </h5>
+            <h4> + ADD TRUCK</h4>
+          </div>
+
+          <div class="box-style-of-my-listed-truck">
+            <table class="table table-bordered">
+              <thead>
+              <tr>
+                <th> Sr. No. </th>
+                <th> Date </th>
+                <th> Truck Reg.no. </th>
+                <th> Driver Name </th>
+                <th></th>
+                <th></th>
+                <th> Truck Status </th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td> 01 </td>
+                  <td> 25th jul,17 </td>
+                  <td> 548881 </td>
+                  <td> Amit Soni </td>
+                  <td></td>
+                  <td></td>
+                  <td><div class="oending-style">Pending</div></td>
+                </tr>
+              </tbody>
+            </table>
+
+               <div class="list-truck-section-btn">
+               <button type="button" class="truck-delete-btn">DELETE</button>
+              <button type="button" class="truck-edit-btn"> Edit  Details </button>
+              
+            </div>      
+
+
+ <table class="table table-bordered">
+              <thead>
+              <tr>
+                <th> Sr. No. </th>
+                <th> Date </th>
+                <th> Truck Reg.no. </th>
+                <th> Driver Name </th>
+                <th></th>
+                <th></th>
+                <th> Truck Status </th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td> 01 </td>
+                  <td> 25th jul,17 </td>
+                  <td> 548881 </td>
+                  <td> Amit Soni </td>
+                  <td></td>
+                  <td></td>
+                  <td><div class="approved-style">Approved</div></td>
+                </tr>
+              </tbody>
+            </table>
+
+               <div class="list-truck-section-btn">
+               <button type="button" class="truck-delete-btn">DELETE</button>
+              <button type="button" class="truck-edit-btn"> Edit  Details </button>
+              
+            </div>
+       
+ </div>
+
+
+
+    </div>
+  </div>
+</section>
+<!--END OF ADDRESS BOOK-->
+
+<!--START OF LOGIN SECTION-->
+<div class="modal fade company-page-modal" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+
+         
+         <div id="container_demo" >
+        
+                 <a class="hiddenanchor" id="toregister"></a>
+                 <a class="hiddenanchor" id="tosuccess"></a>
+                    <a class="hiddenanchor" id="tologin"></a>
+                      <a class="hiddenanchor" id="tofpass"></a>
+                    <div id="wrapper">
+                     
+                     <!--START OF LOGIN-->
+                        <div id="login" class="animate form">
+                        
+                                    <form  action="mysuperscript.php" autocomplete="on"> 
+                                <div class="col-md-12 zero-padding">
+
+<h1>Login  <button type="button" class="close" data-dismiss="modal">&times;</button></h1>
+
+
+<div class="col-md-12 login-sec-style">
+
+
+ <input type="text" class="form-control" name="name" placeholder="Email/Phone No">
+ 
+  <input type="password" class="form-control" name="password" placeholder="Password">
+  <div class="checkbox-inline generate-style">
+  
+  <input type="checkbox" name="">&nbsp; &nbsp;Generate OTP</div>
+  <span class="forget-style"><a href="#tofpass" class="to_fpass">Forgot Password?</a> </span></div>
+<div class="col-md-12">
+<button type="submit" class="btn btn-default" id="sign-style">SIGN IN </button>
+</div>
+
+<div class="col-md-12">
+
+<p class="create-new-style change_link text-center">
+                  
+                <a href="#toregister" class="to_register"><strong>Create an account ?</strong></a>
+                </p>
+</div>
+</div>
+
+                     </form>
+
+
+
+                        </div>
+
+
+                        <!--END OF LOGIN-->
+
+<!--start of success-->
+
+   <div id="success" class="animate form">
+                        
+                                     <form  action="mysuperscript.php" autocomplete="on"> 
+                                  <div class="col-md-12 zero-padding">
+
+<button type="button" class="close close-style" data-dismiss="modal">&times;</button>
+<div class="col-md-12">
+  <div class="success-img text-center">
+    <img src="images/success-img.png">
+  </div>
+</div>
+<div class="col-md-12">
+  <div class="thank-text text-center">
+    <h4>Thank You for <span class="reg-style">Registration !<span></h4>
+  </div>
+</div>
+<div class="col-md-12">
+  <div class="your-account text-center">
+    <p>Your Account has been created and a verification 
+email has been sent to your registered email address.</p>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <div class="create-acc-style text-center">
+    <p>Create an account ?</p>
+  </div>
+</div>
+
+</div>
+                                
+                            </form>
+                        </div>
+
+!--END OF SUCCESS-->
+<!--START OF FORGET-->
+                        <div id="fpass" class="animate form">
+                        
+
+                              <form  action="" autocomplete="on"> 
+                             
+<div class="col-md-12 zero-padding">
+
+<h1 class="register-1">Forget Password <button type="button" class="close" data-dismiss="modal">&times;</button></h1>
+<div class="col-md-12 login-sec-style">
+ <input type="email" class="email-forget form-control" name="email" placeholder="Email Id">
+</div>
+<div class="col-md-12">
+<button type="submit" class="btn btn-default" id="sign-style">Send </button>
+</div>
+
+
+<div class="col-md-12">
+
+<p class="change_link text-center">
+                  
+                  <a href="#toregister" class="to_register"><strong>Create an Account ?</strong></a><br>  <a href="#tologin" class="to_register"><strong>Already have an account ? Login</strong></a>
+                </p>
+</div>
+
+
+</div>
+
+                             
+                                
+                            </form>
+                        </div>
+
+                        <!--END OF FORGET-->
+<!--START OF REGISTER-->
+                        <div id="register" class="animate form">
+                       
+                              <form  action="mysuperscript.php" autocomplete="on"> 
+                                  <div class="col-md-12 zero-padding">
+
+<h1 class="register-1">Register <button type="button" class="close" data-dismiss="modal">&times;</button></h1>
+<div class="col-md-12 login-sec-style">
+ <input type="text" class="form-control" name="name" placeholder="Name">
+ <input type="email" class="form-control" name="email" placeholder="Email ID">
+ <input type="text" class="form-control" name="number" placeholder="Mobile">
+  <input type="password" class="form-control" name="password" placeholder="Password">
+  <input type="password" class="form-control" name="re-password" placeholder="Retype Password">
+  <div class="checkbox-inline generate-style">
+  
+  <input type="checkbox" name="">&nbsp; &nbsp;I Agree with the <span class="terms-and-cond-style"> <a href="#tosuccess" class="to_success"> Terms and condition </a></span></div>
+</div>
+ <div class="col-md-12">
+
+<button type="submit" class="btn btn-default" id="sign-style">REGISTER </button>
+</div>
+</div>
+                                
+                            </form>
+                        </div>
+<!--END OF REGISTER-->
+
+            
+                    </div>
+                </div>
+
+
+      
+    </div>
+  </div>
+<!--END OF LOGIN SECTION-->
+
+<footer>
+    <div class="footer" id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h3> QUICK LINKS </h3>
+                    <ul>
+                        <li> <a href="index.html"> Home </a> </li>
+                        <li> <a href="about-us.html"> About us </a> </li>
+                        <li> <a href="contact-us.html"> Contact us </a> </li>
+                        <li> <a href="faq.html"> Faqs </a> </li>
+                        <li> <a href="#"> Careers </a> </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h3> QUICK LINKS</h3>
+                    <ul>
+                        <li> <a href="#"> How it works </a> </li>
+                        <li> <a href="#"> Track & trace</a> </li>
+                        <li> <a href="#"> Payment terms</a> </li>
+                        <li> <a href="#"> RTO form download </a> </li>
+                        <li> <a href="#"> Privacy policy </a> </li>
+                        <li> <a href="#"> Terms & conditon </a> </li>
+                        <li> <a href="#"> Support </a> </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h3> CONTACT US </h3>
+                    <ul>
+                        <li> <a href="#"> Contact no </a> </li>
+                        <li> <a href="#"> +91-8860978927 </a> </li>
+                        <li> <a href="#"> Address </a> </li>
+                        <li> <a href="#"> Neque porro quisquam est </a> </li>
+                        <li> <a href="#"> qui dolorem </a> </li>
+                        <li> <a href="#"> Email Id </a> </li>
+                        <li> <a href="#"> amitsoni.@technobrix.com </a> </li>
+                    </ul>
+                </div>
+              
+                <div class="col-md-3">
+                    <h3> FOLLOW US </h3>
+                    <ul class="social">
+                        <li> <a href="#"> <i class=" fa fa-facebook">   </i> </a> </li>
+                        <li> <a href="#"> <i class="fa fa-google-plus">   </i> </a> </li>
+                        <li> <a href="#"> <i class="fa fa-twitter">   </i> </a> </li>
+                    </ul>
+                </div>
+                 <div class="col-md-3 app-style">
+                    <h3> DOWNLOAD  APP </h3>
+                    <ul class="google">
+                        <li> <a href="#"> <img src="images/google-img.png"> </a> </li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <!--row--> 
+        </div>
+        <!--container--> 
+    </div>
+    <!--footer-->
+    
+    <div class="footer-bottom">
+        <div class="container">
+            <p class="text-center"> Designed by Technobrix.com </p>
+        
+        </div>
+
+</body>
+</html>

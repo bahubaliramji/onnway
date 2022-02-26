@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rahul Rajppot</title>
+   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/login-popup.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+<header>
+  <div class="container">
+    <div class="col-sm-3 logo">
+      <a href="index.html"><img src="images/logo.png"></a>
+    </div>
+    <div class="col-sm-9 header-top-right">
+      <span class="down-app"><img src="images/mobile.png"> &nbsp;  Download App</span>
+      <span class="phone-contact"><img src="images/phone.png"> &nbsp;  +91 9313 9313 93</span>
+      <span class="login-section"><a data-toggle="modal" data-target="#myModal">LOGIN  |  REGISTER</a></span>
+      <span class="dropdown-top">
+      <select>
+        <option>ENG</option>
+        <option>HIN</option>
+      </select>
+      </span>
+    </div>
+  </div>
+</header>
+<!--end of top header-->
+<header class="header-bottom">
+  <div class="container">
+    <div class="col-md-5 header-bottom-right-text">
+      <h3>SERVICES&nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;TRACK & TRACE</h3>
+    </div>
+
+    <div class="col-md-7">
+    <div class="header-bottom-right-section">
+      <button type="button" class="tab-style">POST A TRUCK</button>
+    </div>
+    
+      
+      
+    </div>
+  </div>
+</header>
+<!--end of top header bottom-->
+<!--START OF BREADCRUMB-->
+<section>
+<div class="container">
+<div class="col-md-12">
+  <div class="breadcrumb-section">
+    <ul>
+       <li><a href="#"> <img src="images/home.png"> </a></li>
+       <li><a href="#" class="bred-active"> Vendor Dashboard </a></li>
+    </ul>
+  </div>
+  </div>
+</div>
+</section>
+<!--END OF BREADCRUMB-->
+
+<!--START OF ADDRESS BOOK-->
+<section>
+  <div class="main-dashboarsd-section style-dash">
+    <div class="container">
+       <div class="col-md-4">
+          <div class="vendor-dashboard-section">
+            <h4>USER DASHBOARD</h4>
+          </div>
+          <div class="dashboad-details">
+              <ul>
+              <li><a href="agent-profile-registration-1.html"> <img src="images/account-detail.png"> Personel Detail </a></li>
+              <li><a href="agent-profile-registration-2.html"> <img src="images/com-detail.png"> Contact Details </a></li>
+             <!-- <li><a href="#"> <img src="images/com-detail.png"> Company Details </a></li>-->
+              <li><a href="agent-profile-registration-3.html"> <img src="images/com-detail.png"> Bank Details </a></li>
+               <!--<li class="dropdown"><a href="#"> <img src="images/my-order.png"> My Truck Details </a></li> -->
+            </ul>
+          </div>
+       </div>
+ 
+       <div class="col-md-7">
+       <div class="box-style-of-truck-info-style">
+ <div class="tab per-profile">
+ <h3>Contact Details</h3>
+  <!--<button class="tablinks active" onclick="openCity(event, 'London')"> Truck Information </button>-->
+  <!--<button class="tablinks" onclick="openCity(event, 'Paris')"> Driver Information </button>-->
+</div>
+
+<div id="London" class="tabcontent information tab-margin" style="display: block;">
+  <div class="row">
+  
+ <div class="col-md-12">
+
+                <label> Address </label>
+
+                <input type="text" name="address" class="form-control" placeholder=" Enter your Address " disabled>
+
+             </div>
+
+  </div>
+
+
+ <div class="row">
+  
+ <div class="col-md-6">
+
+                <label> City </label>
+                <input type="text" name="pincode" class="form-control" placeholder=" New Delhi" disabled>
+
+             </div>
+             <div class="col-md-6">
+
+                <label> Pincode  </label>
+
+                <input type="text" name="pincode" class="form-control" placeholder=" Enter pincode " disabled>
+
+             </div>
+  </div>
+
+  <div class="row">
+  
+ <div class="col-md-6">
+
+                <label>  Alternate contact person </label>
+
+                <input type="text" name="altercontactperson" class="form-control" placeholder=" Enter Name " disabled>
+
+             </div>
+
+ <div class="col-md-6">
+
+                <label>  Alternate mobile no.  </label>
+
+                <input type="text" name="altermobnumber" class="form-control" placeholder=" Enter your Mobile Number " disabled>
+
+             </div>
+  </div>
+ <div class="row">
+  
+ <div class="col-md-6">
+                <label> Pan Card No. </label>
+                <input type="text" name="pan-number" class="form-control" placeholder="Enter No." disabled>
+             </div>
+
+<div class="col-md-6">
+                <div class="truck-permit">
+           <p></p>
+            <span class="file-style-truck other-info file-1 goes"> File name goes here </span><input name="file-5[]" id="file-5" class="inputfile8 inputfile-5" data-multiple-caption="{count} files selected" multiple="" type="file" disabled>
+            <label for="file-5"><i class="camera-truck fa fa-camera" aria-hidden="true"></i>&nbsp; &nbsp; <span>Upload Image</span></label>
+        </div>
+                
+             </div>
+  </div>
+   <div class="row">
+  
+<div class="col-md-6">
+                <label> Aadhar No. </label>
+                <input type="text" name="pan-number" class="form-control" placeholder="Enter No." disabled>
+             </div>
+
+<div class="col-md-6">
+                <div class="truck-permit">
+           <p></p>
+            <span class="file-style-truck other-info file-1 goes"> File name goes here </span><input name="file-5[]" id="file-5" class="inputfile8 inputfile-5" data-multiple-caption="{count} files selected" multiple="" type="file" disabled>
+            <label for="file-5"><i class="camera-truck fa fa-camera" aria-hidden="true"></i>&nbsp; &nbsp; <span>Upload Image</span></label>
+        </div>
+                
+             </div>
+  </div>
+ 
+
+   <div class="row">
+  <div class="col-md-1">
+    
+  </div>
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-9 truck-info-update-btn margin-tab">
+    <button type="submit" class="update-truck-info-btn"> Update </button>
+  </div>
+  
+  </div>
+
+  </div>
+
+
+<div id="Paris" class="tabcontent driver-info">
+
+   <div class="row">
+  
+  <div class="col-md-6">
+    <p> Driver Name </p>
+  <br>
+    <input type="text" name="name" class="form-control" placeholder="Name">
+  </div>
+
+  <div class="col-md-6">
+  <p> Mobile Number </p>
+  <br>
+  <input type="text" name="name" class="form-control" placeholder="Enter your Mobile Number">
+  </div>
+
+  </div>
+
+
+ <div class="row">
+  
+  <div class="col-md-6">
+    <p> Driving Licence </p>
+  <br>
+    <input type="text" name="driving-licence" class="form-control" placeholder="Enter licence no.">
+  </div>
+
+  <div class="col-md-6">
+  <p> </p>
+  <br>
+   <div class="driver-information-style">
+           <p></p>
+            <span class="file-info-style file-name-style"> File name goes here </span><input type="file" name="file-6[]" id="file-6" class="inputfile6 inputfile-6" data-multiple-caption="{count} files selected" multiple="">
+            <label for="file-6"><i class="camera-truck fa fa-camera" aria-hidden="true"></i>&nbsp; &nbsp; <span>Upload Image</span></label>
+        </div>
+  </div>
+  </div>
+
+  <div class="row">
+  
+  <div class="col-md-6">
+    <p> Adhaar No. </p>
+  <br>
+    <input type="text" name="aadhar-no" class=" form-control" placeholder="Enter No." id="aadhar-style">
+  </div>
+
+  <div class="col-md-6">
+  <p> </p>
+  <br>
+ <div class="driver-information-style">
+           <p></p>
+            <span class="file-info-style file-name-style"> File name goes here </span><input type="file" name="file-6[]" id="file-6" class="inputfile6 inputfile-6" data-multiple-caption="{count} files selected" multiple="">
+            <label for="file-6"><i class="camera-truck fa fa-camera" aria-hidden="true"></i>&nbsp; &nbsp; <span>Upload Image</span></label>
+        </div>
+  </div>
+  </div>
+
+  <div class="row">
+  
+  <div class="col-md-6">
+    <p> Fitness Certificate </p>
+  <br>
+  <div class="driver-information-style">
+           <p></p>
+            <span class="file-info-style"> File name goes here </span><input type="file" name="file-6[]" id="file-6" class="inputfile6 inputfile-6" data-multiple-caption="{count} files selected" multiple="">
+            <label for="file-6"><i class="camera-truck fa fa-camera" aria-hidden="true"></i>&nbsp; &nbsp; <span>Upload Image</span></label>
+        </div>
+  </div>
+
+  <div class="col-md-6">
+  <p> Driver Certificate by Owner </p>
+  <br>
+ <div class="driver-information-style">
+           <p></p>
+            <span class="file-info-style"> File name goes here </span><input type="file" name="file-6[]" id="file-6" class="inputfile6 inputfile-6" data-multiple-caption="{count} files selected" multiple="">
+            <label for="file-6"><i class="camera-truck fa fa-camera" aria-hidden="true"></i>&nbsp; &nbsp; <span>Upload Image</span></label>
+        </div>
+  </div>
+  </div>
+
+   <div class="row">
+  <div class="col-md-1">
+    
+  </div>
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-9 truck-info-update-btn">
+    <button type="submit" class="update-truck-info-btn driver"> Update </button>
+  </div>
+  
+  </div>
+
+  </div> 
+
+</div>
+  </div>
+
+       
+
+    </div>
+  </div>
+</section>
+<!--END OF ADDRESS BOOK-->
+
+<!--START OF LOGIN SECTION-->
+<div class="modal fade company-page-modal" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+
+         
+         <div id="container_demo" >
+        
+                 <a class="hiddenanchor" id="toregister"></a>
+                 <a class="hiddenanchor" id="tosuccess"></a>
+                    <a class="hiddenanchor" id="tologin"></a>
+                      <a class="hiddenanchor" id="tofpass"></a>
+                    <div id="wrapper">
+                     
+                     <!--START OF LOGIN-->
+                        <div id="login" class="animate form">
+                        
+                                    <form  action="mysuperscript.php" autocomplete="on"> 
+                                <div class="col-md-12 zero-padding">
+
+<h1>Login  <button type="button" class="close" data-dismiss="modal">&times;</button></h1>
+
+
+<div class="col-md-12 login-sec-style">
+
+
+ <input type="text" class="form-control" name="name" placeholder="Email/Phone No">
+ 
+  <input type="password" class="form-control" name="password" placeholder="Password">
+  <div class="checkbox-inline generate-style">
+  
+  <input type="checkbox" name="">&nbsp; &nbsp;Generate OTP</div>
+  <span class="forget-style"><a href="#tofpass" class="to_fpass">Forgot Password?</a> </span></div>
+<div class="col-md-12">
+<button type="submit" class="btn btn-default" id="sign-style">SIGN IN </button>
+</div>
+
+<div class="col-md-12">
+
+<p class="create-new-style change_link text-center">
+                  
+                <a href="#toregister" class="to_register"><strong>Create an account ?</strong></a>
+                </p>
+</div>
+</div>
+
+                     </form>
+
+
+
+                        </div>
+
+
+                        <!--END OF LOGIN-->
+
+<!--start of success-->
+
+   <div id="success" class="animate form">
+                        
+                                     <form  action="mysuperscript.php" autocomplete="on"> 
+                                  <div class="col-md-12 zero-padding">
+
+<button type="button" class="close close-style" data-dismiss="modal">&times;</button>
+<div class="col-md-12">
+  <div class="success-img text-center">
+    <img src="images/success-img.png">
+  </div>
+</div>
+<div class="col-md-12">
+  <div class="thank-text text-center">
+    <h4>Thank You for <span class="reg-style">Registration !<span></h4>
+  </div>
+</div>
+<div class="col-md-12">
+  <div class="your-account text-center">
+    <p>Your Account has been created and a verification 
+email has been sent to your registered email address.</p>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <div class="create-acc-style text-center">
+    <p>Create an account ?</p>
+  </div>
+</div>
+
+</div>
+                                
+                            </form>
+                        </div>
+
+!--END OF SUCCESS-->
+<!--START OF FORGET-->
+                        <div id="fpass" class="animate form">
+                        
+
+                              <form  action="" autocomplete="on"> 
+                             
+<div class="col-md-12 zero-padding">
+
+<h1 class="register-1">Forget Password <button type="button" class="close" data-dismiss="modal">&times;</button></h1>
+<div class="col-md-12 login-sec-style">
+ <input type="email" class="email-forget form-control" name="email" placeholder="Email Id">
+</div>
+<div class="col-md-12">
+<button type="submit" class="btn btn-default" id="sign-style">Send </button>
+</div>
+
+
+<div class="col-md-12">
+
+<p class="change_link text-center">
+                  
+                  <a href="#toregister" class="to_register"><strong>Create an Account ?</strong></a><br>  <a href="#tologin" class="to_register"><strong>Already have an account ? Login</strong></a>
+                </p>
+</div>
+
+
+</div>
+
+                             
+                                
+                            </form>
+                        </div>
+
+                        <!--END OF FORGET-->
+<!--START OF REGISTER-->
+                        <div id="register" class="animate form">
+                       
+                              <form  action="mysuperscript.php" autocomplete="on"> 
+                                  <div class="col-md-12 zero-padding">
+
+<h1 class="register-1">Register <button type="button" class="close" data-dismiss="modal">&times;</button></h1>
+<div class="col-md-12 login-sec-style">
+ <input type="text" class="form-control" name="name" placeholder="Name">
+ <input type="email" class="form-control" name="email" placeholder="Email ID">
+ <input type="text" class="form-control" name="number" placeholder="Mobile">
+  <input type="password" class="form-control" name="password" placeholder="Password">
+  <input type="password" class="form-control" name="re-password" placeholder="Retype Password">
+  <div class="checkbox-inline generate-style">
+  
+  <input type="checkbox" name="">&nbsp; &nbsp;I Agree with the <span class="terms-and-cond-style"> <a href="#tosuccess" class="to_success"> Terms and condition </a></span></div>
+</div>
+ <div class="col-md-12">
+
+<button type="submit" class="btn btn-default" id="sign-style">REGISTER </button>
+</div>
+</div>
+                                
+                            </form>
+                        </div>
+<!--END OF REGISTER-->
+
+            
+                    </div>
+                </div>
+
+
+      
+    </div>
+  </div>
+<!--END OF LOGIN SECTION-->
+<script>
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+
+
+
+<footer>
+    <div class="footer" id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h3> QUICK LINKS </h3>
+                    <ul>
+                        <li> <a href="index.html"> Home </a> </li>
+                        <li> <a href="about-us.html"> About us </a> </li>
+                        <li> <a href="contact-us.html"> Contact us </a> </li>
+                        <li> <a href="faq.html"> Faqs </a> </li>
+                        <li> <a href="#"> Careers </a> </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h3> QUICK LINKS</h3>
+                    <ul>
+                        <li> <a href="#"> How it works </a> </li>
+                        <li> <a href="#"> Track & trace</a> </li>
+                        <li> <a href="#"> Payment terms</a> </li>
+                        <li> <a href="#"> RTO form download </a> </li>
+                        <li> <a href="#"> Privacy policy </a> </li>
+                        <li> <a href="#"> Terms & conditon </a> </li>
+                        <li> <a href="#"> Support </a> </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h3> CONTACT US </h3>
+                    <ul>
+                        <li> <a href="#"> Contact no </a> </li>
+                        <li> <a href="#"> +91-8860978927 </a> </li>
+                        <li> <a href="#"> Address </a> </li>
+                        <li> <a href="#"> Neque porro quisquam est </a> </li>
+                        <li> <a href="#"> qui dolorem </a> </li>
+                        <li> <a href="#"> Email Id </a> </li>
+                        <li> <a href="#"> amitsoni.@technobrix.com </a> </li>
+                    </ul>
+                </div>
+              
+                <div class="col-md-3">
+                    <h3> FOLLOW US </h3>
+                    <ul class="social">
+                        <li> <a href="#"> <i class=" fa fa-facebook">   </i> </a> </li>
+                        <li> <a href="#"> <i class="fa fa-google-plus">   </i> </a> </li>
+                        <li> <a href="#"> <i class="fa fa-twitter">   </i> </a> </li>
+                    </ul>
+                </div>
+                 <div class="col-md-3 app-style">
+                    <h3> DOWNLOAD  APP </h3>
+                    <ul class="google">
+                        <li> <a href="#"> <img src="images/google-img.png"> </a> </li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <!--row--> 
+        </div>
+        <!--container--> 
+    </div>
+    <!--footer-->
+    
+    <div class="footer-bottom">
+        <div class="container">
+            <p class="text-center"> Designed by Technobrix.com </p>
+        
+        </div>
+                <script type="text/javascript">
+$('.update-truck-info-btn').click(function () {
+   $('.tabcontent.information input[type="text"], .tabcontent.information input[type="email"], .tabcontent.information input[type="password"], .tabcontent.information .select-style, .tabcontent.information .inputfile8').removeAttr('disabled');
+return false;
+
+})
+
+</script>
+
+</body>
+</html>
